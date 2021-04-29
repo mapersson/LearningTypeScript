@@ -1,7 +1,7 @@
 interface Categories {
   name: string;
   displayName: string;
-  subCategories: Categories[];
+  subCategories: { name: string; displayString: string }[];
 }
 
 class InventoryStore {

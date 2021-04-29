@@ -20,7 +20,7 @@ export default Vue.extend({
       );
     },
     subCategories() {
-      return this.category.subCategories;
+      return this.categories.subCategories;
     },
     editorComponent() {
       switch (this.item.inventoryType) {

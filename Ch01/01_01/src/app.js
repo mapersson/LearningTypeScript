@@ -17,19 +17,19 @@ const MainContent = () => ({
           </template>
         </router>
       </div>
-    `
-  }))
+    `,
+  })),
 });
 
 const router = Vue.extend({
   data: () => ({
     currentRoute: null,
-    ViewComponent: null
+    ViewComponent: null,
   }),
   methods: {
     syncRoute() {
       this.currentRoute = window.location.hash.replace(/^#\//, "");
-    }
+    },
   },
   watch: {
     currentRoute() {
@@ -38,12 +38,12 @@ const router = Vue.extend({
       const page = this.currentRoute || "inventory";
 
       import(`./${page}/${page}.js`)
-        .then(x => (this.ViewComponent = x.default))
-        .catch(err => {
+        .then((x) => (this.ViewComponent = x.default))
+        .catch((err) => {
           console.warn(err);
           this.ViewComponent = "notFound";
         });
-    }
+    },
   },
   created() {
     window.addEventListener("hashchange", this.syncRoute);
@@ -57,7 +57,7 @@ const router = Vue.extend({
     }
 
     return typeof vc === "string" ? this.$slots[vc] : h(this.ViewComponent);
-  }
+  },
 });
 
 Vue.component("loading", {
@@ -70,7 +70,7 @@ Vue.component("loading", {
         </div>
       </div>
     </div>
-  `
+  `,
 });
 
 // initialize the app
@@ -83,5 +83,5 @@ new Vue({
             <h3 class="text-muted">Inventory Management System</h3>
         </div>
         <main-content />
-    </div>`
+    </div>`,
 });

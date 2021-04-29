@@ -20,7 +20,7 @@ enum InventoryItemType {
 interface InventoryItem {
   displayName: string;
   inventoryType: InventoryItemType;
-  readonly trackingNumber: string;
+  trackingNumber: string;
   createDate: Date;
   originalCost?: number;
 
@@ -43,3 +43,12 @@ saveInventoryItem({
   trackingNumber: "MBP123456",
   createDate: new Date(),
 });
+
+function clone<T>(source: T): T {
+  const serialized = JSON.stringify(source);
+  return JSON.parse(serialized);
+}
+
+const cloned = clone<InventoryItem>(inventoryItem);
+
+declare var Vue: any;
