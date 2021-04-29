@@ -2,24 +2,44 @@ let displayName: string = "Jess's standing desk";
 let inventoryType: string = "furniture";
 let trackingNumber: string = "FD123455";
 let createDate: Date = new Date();
-let originalCost: number = 425;
 
-function getInventoryItem(
-  trackingNumber
-): {
+type Cost = number | string;
+let originalCost: Cost = "This is string";
+
+if (typeof originalCost == "number") {
+  let cost: number = originalCost;
+} else {
+  let x = originalCost;
+}
+
+enum InventoryItemType {
+  Computer = "computer",
+  Furniture = "furniture",
+}
+
+interface InventoryItem {
   displayName: string;
-  inventoryType: string;
-  trackingNumber: string;
+  inventoryType: InventoryItemType;
+  readonly trackingNumber: string;
   createDate: Date;
-  originalCost: number;
-} {
+  originalCost?: number;
+
+  addNote?: (note: string) => string;
+}
+
+function getInventoryItem(trackingNumber): InventoryItem {
   return null;
 }
 
-function saveInventoryItem(item) {}
+function saveInventoryItem(item: InventoryItem) {}
 
 let inventoryItem = getInventoryItem(trackingNumber);
 
 inventoryItem.createDate = new Date();
 
-saveInventoryItem(inventoryItem);
+saveInventoryItem({
+  displayName: "MacBook Pro 15 Retina",
+  inventoryType: InventoryItemType.Computer,
+  trackingNumber: "MBP123456",
+  createDate: new Date(),
+});

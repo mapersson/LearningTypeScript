@@ -8,14 +8,16 @@ export default Vue.extend({
     errors: [],
     item: {},
     saving: false,
-    showSavedMessage: false
+    showSavedMessage: false,
   }),
   computed: {
     canSubmit() {
       return this.item && !!this.item.subCategory;
     },
     category() {
-      return this.categories.find(x => x.name === this.item.inventoryType) || {};
+      return (
+        this.categories.find((x) => x.name === this.item.inventoryType) || {}
+      );
     },
     subCategories() {
       return this.category.subCategories;
@@ -31,7 +33,7 @@ export default Vue.extend({
         default:
           return null;
       }
-    }
+    },
   },
   methods: {
     onSubmit() {
@@ -45,7 +47,7 @@ export default Vue.extend({
           this.saving = false;
           setTimeout(() => (this.showSavedMessage = false), 4000);
         })
-        .catch(errors => {
+        .catch((errors) => {
           this.errors.splice(0, Infinity, ...errors);
           this.saving = false;
         });
@@ -56,8 +58,8 @@ export default Vue.extend({
       this.showErrors = false;
     },
     hasError(field) {
-      return !!this.errors.find(x => x.field === field);
-    }
+      return !!this.errors.find((x) => x.field === field);
+    },
   },
   template: `
     <div>
@@ -141,5 +143,5 @@ export default Vue.extend({
         </form>
       </div>
     </div>
-    `
+    `,
 });
